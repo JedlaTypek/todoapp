@@ -1,5 +1,5 @@
 # ToDo App
-## Použité technologie: React + TypeScript + Vite
+Jednoduchá ToDo aplikace s použítím technologií TypeScript a knihovny React. 
 
 Funkce:
 - Zobrazení hotových a nehotových úkolů odděleně
