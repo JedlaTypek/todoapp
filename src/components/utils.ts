@@ -1,6 +1,6 @@
 interface Task{
     name:string,
-    deadline?:Date,
+    deadline:Date,
     done:boolean
 }
 

@@ -15,7 +15,7 @@ const AddTask = ( { onAddTask }:Props ) => {
         if (taskText.trim() !== '') {
           const newTask: Task = {
             name: taskText,
-            deadline: deadline === '' ? new Date(new Date().getTime() + 24*60*60*1000) : new Date(deadline),
+            deadline: deadline === '' ? '' : new Date(deadline),
             done: false
           };
           onAddTask(newTask);
