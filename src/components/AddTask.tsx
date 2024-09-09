@@ -30,7 +30,7 @@ const AddTask = ( { onAddTask }:Props ) => {
             type="text"
             value={taskText}
             onChange={(e) => setTaskText(e.target.value)}
-            placeholder="Enter task"
+            placeholder="Zadej název úkolu"
           />
           <input
             type="datetime-local"
