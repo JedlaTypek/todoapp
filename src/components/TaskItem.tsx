@@ -8,20 +8,32 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 interface Props{
     name: string;
-    deadline: Date;
+    deadline?: Date;
     done: boolean;
+    index: number;
+    onChangeDone: (index:number) => void;
 }
 
-function TaskItem({name, deadline, done}:Props){
-    let deadlineText:string = deadline.getDate().toString() + '. ' + (deadline.getMonth()+1).toString() + '. ' + deadline.getHours().toString() + ':' + deadline.getMinutes().toString().padStart(2, '0');
-    const now = new Date().getTime();
-    let remainingTime = deadline.getTime() - now;
+function TaskItem({name, deadline, done, index, onChangeDone}:Props){
+    let deadlineText:string = "";
+    let remainingTime = 24*60*60*1000+1;
+    if (deadline){
+        const deadlineDate = new Date(deadline);
+        deadlineText = deadlineDate.getDate().toString() + '. ' + (deadlineDate.getMonth()+1).toString() + '. ' + deadlineDate.getHours().toString() + ':' + deadlineDate.getMinutes().toString().padStart(2, '0');
+        const now = new Date().getTime();
+        let remainingTime = deadlineDate.getTime() - now;
+    }
+
+    const handleChangeDone = () => {
+        onChangeDone(index);
+    }
+
     return (
         <div className="task">
-            {done ? <FontAwesomeIcon icon={faCircleXmark} className='trash'/> : <FontAwesomeIcon icon={faCircleCheck} className='check'/>}
+            {done ? <FontAwesomeIcon icon={faCircleXmark} className='trash' onClick={handleChangeDone}/> : <FontAwesomeIcon icon={faCircleCheck} className='check' onClick={handleChangeDone}/>}
             <div className={'taskItemContent' + (remainingTime < 0 && !done ? ' missed' : (remainingTime < 24*60*60*1000 && !done ? ' dayLeft' : ''))}>
                 <h3 className="name">{name}</h3>
-                <p className="deadline">{deadlineText}</p>
+                {deadline && <p className="deadline">{deadlineText}</p>}
             </div>
             <FontAwesomeIcon icon={faEdit} />
             <FontAwesomeIcon icon={faTrash} className='trash'/>

@@ -48,3 +48,28 @@
 .missed .name{
   color: red;
 }
+.sendBtn{
+  background-color: #46ACC2;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+input{
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #393C3D;
+}
+.addTask{
+  background-color: rgb(49, 49, 49);
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.addTask input[type="text"]{
+  flex-grow: 1;
+}
