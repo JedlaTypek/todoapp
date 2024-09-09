@@ -12,9 +12,10 @@ interface Props{
     done: boolean;
     index: number;
     onChangeDone: (index:number) => void;
+    onRemove: (index:number) => void;
 }
 
-function TaskItem({name, deadline, done, index, onChangeDone}:Props){
+function TaskItem({name, deadline, done, index, onChangeDone, onRemove}:Props){
     let deadlineText:string = "";
     let remainingTime = 24*60*60*1000+1;
     if (deadline){
@@ -28,6 +29,10 @@ function TaskItem({name, deadline, done, index, onChangeDone}:Props){
         onChangeDone(index);
     }
 
+    const handleRemove = () => {
+        onRemove(index);
+    }
+
     return (
         <div className="task">
             {done ? <FontAwesomeIcon icon={faCircleXmark} className='trash' onClick={handleChangeDone}/> : <FontAwesomeIcon icon={faCircleCheck} className='check' onClick={handleChangeDone}/>}
@@ -36,7 +41,7 @@ function TaskItem({name, deadline, done, index, onChangeDone}:Props){
                 {deadline && <p className="deadline">{deadlineText}</p>}
             </div>
             <FontAwesomeIcon icon={faEdit} />
-            <FontAwesomeIcon icon={faTrash} className='trash'/>
+            <FontAwesomeIcon icon={faTrash} className='trash' onClick={handleRemove}/>
         </div>
     )
 }

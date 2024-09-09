@@ -33,14 +33,22 @@ function App() {
     });
   };
 
+  const deleteTask = (index: number) =>{
+    setTasks(prevTasks => {
+      const newTasks = [...prevTasks];
+      newTasks.splice(index, 1);
+      return newTasks;
+    });
+  }
+
   return (
     <>
       <h1>ToDo App</h1>
       <p>Poslední aktualizace: {(new Date).toLocaleString()}</p>
       <h2>Přidat úkol:</h2>
       <AddTask onAddTask={addTask} />
-      <TaskList heading='Nehotové úkoly' done={false} tasks={tasks} onChangeDone={changeDone}/>
-      <TaskList heading='Hotové úkoly' done tasks={tasks} onChangeDone={changeDone}/>
+      <TaskList heading='Nehotové úkoly' done={false} tasks={tasks} onChangeDone={changeDone} onRemove={deleteTask}/>
+      <TaskList heading='Hotové úkoly' done tasks={tasks} onChangeDone={changeDone} onRemove={deleteTask}/>
     </>
   )
 }
